@@ -1,0 +1,365 @@
+
+<!-- Dynamic Tab with Faq content (faq section with dynamic tabs) --->  
+
+<style>
+  /* CSS for Tab Section */
+.fx_tab_container
+{
+  	max-width: 1600px;
+  	margin: auto;
+  	padding:10px;
+  padding-bottom: 100px;
+    margin-bottom: 50px;
+}
+  .fx_tab_container.color-background-1 h2 {
+    font-size: 45px;
+    line-height: 50px;
+    text-align: left;
+    padding-top: 80px;
+    max-width: 100%;
+    width: 72%;
+    margin: 50px auto 50px; 
+        border-bottom: 2px solid grey;
+    padding-bottom: 15px;
+}
+  .tab button.active:after {
+    display: none;
+}
+  .tab {
+      overflow: hidden;
+    max-width: 100%;
+    width: 74%;
+    margin: 0 auto;
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    display: flex;
+    justify-content: space-between;
+}
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+   font-size: 30px;
+    line-height: 35px;
+    font-family: 'Helvetica';
+    font-weight: 600;
+  margin: 0 20px;
+}
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+/* Create an active/current tablink class */
+.tab button.active {
+  border: 2px solid black;
+    border-left: none;
+    border-top: none;
+    border-right: none;
+}
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border-top: none;
+}
+  /* end of CSS for Tab Section */
+  /* CSS for Faq Section */
+ .accordion {
+    color: #444;
+    cursor: pointer;
+    padding: 25px 20px;
+        display: flex;
+    border-right: none;
+  border-left: none;
+/*   border-bottom: none; */
+       border-top: none;
+    outline: none;
+    font-size: 22px;
+    transition: 0.4s;
+    text-align: center;
+      width: 90%;
+    margin: auto;
+  position: relative;
+  font-family: 'Assistant';
+  font-weight: 700;
+   border-bottom: 2px solid #00587C;
+      margin-bottom: 20px;
+}
+.accordion:after {
+  content: '\002B';
+  color: #000;
+  float: right;
+  position: absolute;
+    right: 40px;
+  font-size: 30px;
+
+}
+.active:after {
+  content: "\2212";
+}
+.tab_panel_container {
+    max-width: 100%;
+    width: 82%;
+    margin: 0 auto;
+}
+  .panel p {padding-bottom: 20px;}
+.panel {
+  padding: 0 18px;
+
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.9s ease-out;
+  text-align: left;
+   width: 90%;
+   margin: auto;
+
+}
+
+  .faq_accor_container h2 { text-align: center; font-size: 34px; font-weight:700; padding-top: 50px; margin-top: 0;}
+
+  .faq_url {
+    text-align: center;
+    font-size: 20px;
+        padding-bottom: 50px;
+}
+
+.faq_url a {
+    text-decoration: none;
+    color: #BF9000;
+}
+  @media screen and (max-width: 600px) {
+    .fx_tab_container.color-background-1 h2 {
+    font-size: 32px;
+    line-height: 45px;
+    text-align: left;
+    padding-top: 30px;
+    max-width: 100%;
+    width: 95%;
+    margin: 50px auto 50px;
+    }
+    .tab_panel_container{
+          width: 100%;
+    }
+    .tabcontent {
+    padding: 6px 1px;
+   }
+  .tab {
+    overflow: hidden;
+    max-width: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+    .tab button {
+    padding: 14px 5px;
+    transition: 0.3s;
+    font-size: 16px;
+    line-height: 35px;
+    margin: 0 auto;
+  }
+	.fx_tab_container
+    {
+     	padding: 30px 5px;
+      margin-bottom: 60px;
+    }
+   .heading_part {
+      width: 100%;
+      padding: 0 20px;
+	}
+    .faq_url
+    {
+     	padding-bottom: 5px!important;
+    }
+    .accordion:after {
+       right: 10px;
+      font-size: 20px;
+      top: 15px;
+    }
+    .panel {
+      width: 100%;
+    }
+    .faq_accor_container h2
+    {
+     	padding-top: 30px;
+     	font-size: 18px;
+    }
+    .accordion
+    {
+     padding: 20px 10px!important;
+      font-size: 14px;     
+      width: 100%;
+      border-bottom: 2px solid #00587C;
+      margin-bottom: 20px;
+    }
+
+
+  }
+
+</style>
+
+<div class="fx_tab_container color-{{ section.settings.color_scheme1 }}">
+ <h2>{{section.settings.sec_heading}}</h2>
+
+   <div class="tab">
+     {% for block in section.blocks %}
+  <button class="tablinks" onclick="openCity(event, '{{block.settings.tab-title}}')" id="defaultOpen">{{block.settings.tab-title}}</button>
+     {% endfor %}
+</div>
+
+
+  {% for block in section.blocks %}
+<div class="tab_panel_container">
+<div id="{{block.settings.tab-title}}" class="tabcontent">
+  <button class="accordion">{{block.settings.blk_q}}</button>
+  <div class="panel"> <p>{{block.settings.blk_ans}}</p></div>
+    <button class="accordion">{{block.settings.blk_q2}}</button>
+  <div class="panel"> <p>{{block.settings.blk_ans2}}</p></div>
+    <button class="accordion">{{block.settings.blk_q3}}</button>
+  <div class="panel"> <p>{{block.settings.blk_ans3}}</p></div>
+
+</div>
+  </div>
+{% endfor %}
+</div>
+
+<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+  });
+}
+</script>
+<script>
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
+
+
+{% schema %}
+  {
+    "name": "dynamic_tab_faq",
+    "settings": [
+			{
+              "type": "text",
+              "id": "sec_heading",
+              "label": "Write section text"
+			},
+			  {
+      "type": "select",
+      "id": "color_scheme1",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "accent-1"
+        },
+        {
+          "value": "accent-2",
+          "label": "accent-2"
+        },
+        {
+          "value": "background-1",
+          "label": "background-1"
+        },
+        {
+          "value": "background-2",
+          "label": "background-2"
+        }
+      ],
+      "default": "accent-1",
+      "label": "choose background color for logo showcase",
+      "info": "accent-1"
+      }
+		
+],
+
+
+	"blocks": [
+	   {
+         "name": "block-tab",
+         "type": "heading",
+         "settings": [
+
+		{
+          "type": "text",
+          "id": "tab-title",
+          "label": "write tab title",
+		  "default" : "my Tab"
+        },
+		 {
+            "type": "text",
+            "id": "blk_q",
+            "label": "write Your Faq Question"
+          },
+          {
+            "type": "textarea",
+            "id": "blk_ans",
+            "label": "Answer of Faq Question"
+		  },
+			{
+            "type": "text",
+            "id": "blk_q2",
+            "label": "write Your Faq Question"
+          },
+          {
+            "type": "textarea",
+            "id": "blk_ans2",
+            "label": "Answer of Faq Question"
+		  },
+		{
+            "type": "text",
+            "id": "blk_q3",
+            "label": "write Your Faq Question"
+          },
+          {
+            "type": "textarea",
+            "id": "blk_ans3",
+            "label": "Answer of Faq Question"
+		  }
+
+		]
+     }
+   ],
+
+	 "presets": [
+    {
+      "name": "dynamic_tab_faq",
+      "blocks": [
+
+      ]
+    }
+  ]
+
+
+  }
+
+{% endschema %}
